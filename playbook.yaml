@@ -1,0 +1,55 @@
+---
+- name: install openjdk16
+  hosts: some_group
+  gather_facts: false
+  become: true
+
+  tasks:
+#  - name: update cache
+#    apt:
+#      update_cache: true
+
+#  - name: upgrate
+#    apt: 
+#      upgrade: true
+  
+#  - name: install openjdk
+#    apt:
+#      name: openjdk-16-jdk-headless
+
+  - name: copy server.jar
+    copy: 
+      src: /home/lerik/playground/files/server.jar
+      dest: "{{ minecraft_dir }}"
+      mode: '0777'
+
+  - name: copy server.properties
+    template: 
+      src: "server.properties.j2"
+      dest: "{{ minecraft_dir }}server.properties"
+      mode: '0744'
+
+  - name: Eula
+    template:
+      src: "eula.j2"
+      dest: "{{ minecraft_dir }}eula.txt"
+      mode: '0444'
+
+  - name: copy start_script
+    template: 
+      src: "start_script.j2"
+      dest: "{{ minecraft_dir }}start_script.sh"
+      mode: '0744'
+
+- name: start minecraft server
+  hosts: some_group
+  gather_facts: false
+  become: true
+
+  tasks:
+  - name: start server
+    command: "screen -dmS mcsrv {{ minecraft_dir }}start_script.sh"
+    args:
+      chdir: "{{ minecraft_dir }}"
+
+      

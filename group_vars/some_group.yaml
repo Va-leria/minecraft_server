@@ -1,0 +1,9 @@
+---
+user_dir: "/home/{{ ansible_user }}"
+minecraft_dir: "{{ user_dir }}/minecraft/"
+mcsrvprops_gamemode: "creative"
+mcsrvprops_pvp: "true"
+mcsrvprops_max_players: "10"
+mcsrvprops_allow_flight: "true"
+mcsrvprops_online_mode: "false"
+mcsrvprops_eula_acception: "true"

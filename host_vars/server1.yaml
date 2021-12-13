@@ -1,0 +1,5 @@
+---
+ansible_host: 192.168.1.38
+ansible_user: lerik
+ansible_sudo_pass: lerik411
+ansible_ssh_private_key_file: /home/lerik/.ssh/id_rsa
